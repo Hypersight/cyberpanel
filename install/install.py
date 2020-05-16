@@ -435,7 +435,7 @@ class preFlightsChecks:
 
         os.chdir('/usr/local')
 
-        command = "git clone https://github.com/usmannasir/cyberpanel"
+        command = "git clone https://github.com/Hypersight/cyberpanel"
         preFlightsChecks.call(command, self.distro, command, command, 1, 1, os.EX_OSERR)
 
         shutil.move('cyberpanel', 'CyberCP')
@@ -2079,7 +2079,7 @@ milter_default_action = accept
             activate_this = os.path.join(env_path, 'bin', 'activate_this.py')
             exec(compile(open(activate_this, "rb").read(), activate_this, 'exec'), dict(__file__=activate_this))
 
-            command = "pip3 install --ignore-installed -r %s" % ('/usr/local/CyberCP/WebTerminal/requirments.txt')
+            command = "pip3 install --ignore-installed -r %s" % ('/usr/local/CyberCP/WebTerminal/requirements.txt')
             preFlightsChecks.call(command, distro, '[install python36]',
                                   'install python36',
                                   1, 0, os.EX_OSERR)
@@ -2110,7 +2110,7 @@ milter_default_action = accept
             activate_this = os.path.join(env_path, 'bin', 'activate_this.py')
             exec(compile(open(activate_this, "rb").read(), activate_this, 'exec'), dict(__file__=activate_this))
 
-            command = "pip3 install --ignore-installed -r %s" % ('/usr/local/CyberCP/WebTerminal/requirments.txt')
+            command = "pip3 install --ignore-installed -r %s" % ('/usr/local/CyberCP/WebTerminal/requirements.txt')
             preFlightsChecks.call(command, distro, '[install python36]',
                                   'install python36',
                                   1, 0, os.EX_OSERR)

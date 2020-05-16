@@ -33,7 +33,7 @@ from plogical import hashPassword
 from emailMarketing.emACL import emACL
 from plogical.processUtilities import ProcessUtilities
 from managePHP.phpManager import PHPManager
-from ApachController.ApacheVhosts import ApacheVhost
+from ApacheController.ApacheVhosts import ApacheVhost
 from plogical.vhostConfs import vhostConfs
 from plogical.cronUtil import CronUtil
 from plogical import randomPassword
@@ -2364,7 +2364,7 @@ StrictHostKeyChecking no
             if hashPassword.check_password(admin.password, adminPass):
 
                 if adminEmail is None:
-                    data['adminEmail'] = "usman@cyberpersons.com"
+                    data['adminEmail'] = "admin@localhost"
 
                 try:
                     acl = ACL.objects.get(name=apiACL)

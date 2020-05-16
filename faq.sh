@@ -12,59 +12,59 @@ NC='\033[0m' # No Color
 
 echo -e "Use Up/Down Arrow key to navigate\n"
 echo -e "press ${RED}q${NC} to exit\n"
-echo -e "Frequently Asked Question
+echo -e "Frequently Asked Questions
 
-${PURPLE}1.${NC} How to reset CyberPanel admin password?
+${PURPLE}1.${NC} How to reset the CyberPanel admin password?
 
 execute command ${RED}adminPass YOUR_NEW_PASSWORD${NC}
 
 ${BLUE}------------------------------------------------------------${NC}
 
-${PURPLE}2.${NC} How to reset LiteSpeed WebAdmin Console user/password ?
+${PURPLE}2.${NC} How to reset the LiteSpeed WebAdmin Console user/password ?
 
 execute command ${RED}/usr/local/lsws/admin/misc/admpass.sh${NC}
 
 ${BLUE}------------------------------------------------------------${NC}
 
-${PURPLE}3.${NC} How to access LiteSpeed webadmin console ?
+${PURPLE}3.${NC} How to access the LiteSpeed WebAdmin console ?
 
 Please check this post: ${GREEN}https://forums.cyberpanel.net/discussion/87/tutorial-how-to-setup-and-login-to-openlitespeed-webadmin-console/p1${NC}
 
 ${BLUE}------------------------------------------------------------${NC}
 
-${PURPLE}4.${NC} What is MariaDB root password ?
+${PURPLE}4.${NC} What is the MariaDB root password ?
 
 execute command ${RED}cat /etc/cyberpanel/mysqlPassword${NC} will show you the root password
 
 ${BLUE}------------------------------------------------------------${NC}
 
-${PURPLE}5.${NC} Can I change MariaDB root passwod ?
+${PURPLE}5.${NC} Can I change the MariaDB root passwod ?
 
-Yes , but after you changed , please make sure you have updated the password in following 2 files as well
+Yes, but after you have changed it, please make sure you have updated the password in following 2 files as well:
 
 ${RED}/etc/cyberpanel/mysqlPassword${NC}
 
 ${RED}/usr/local/CyberCP/CyberCP/settings.py${NC}
 
-otherwise CyberPanel will not have access to database.
+Otherwise CyberPanel will not have access to the database.
 
 ${BLUE}------------------------------------------------------------${NC}
 
-${PURPLE}6.${NC} How to raise upload limit for cyberpanel's phpMyAdmin and File Manager?
+${PURPLE}6.${NC} How to raise the upload limit for CyberPanel's phpMyAdmin and File Manager?
 
 edit file ${RED}/usr/local/lsws/lsphp73/etc/php.ini${NC} for CentOS
 
-${RED}/usr/local/lsws/lsphp73/etc/php/7.3/litespeed/php.ini${NC} for Ubbuntu
+${RED}/usr/local/lsws/lsphp73/etc/php/7.3/litespeed/php.ini${NC} for Ubuntu
 
-find 2 configurations:
+Finf the following 2 configurations:
 
-${RED}post_max_size${NC} and ${RED}upload_max_filesize${NC} , change from to higher number, e.g. ${RED}100M${NC} (don't miss the M)
+${RED}post_max_size${NC} and ${RED}upload_max_filesize${NC}, change these to a higher number (e.g. ${RED}100M${NC} - don't forget the M)
 
-and then run ${RED}pkill lsphp${NC} to kill all current php process for new configuration to take effect.
+Then run ${RED}pkill lsphp${NC} to kill all current php processes for new configuration to take effect.
 
 ${BLUE}------------------------------------------------------------${NC}
 
-${PURPLE}7.${NC} How to add more IPs to my website(s) ?
+${PURPLE}7.${NC} How do I add more IP's to my website(s)?
 
 For OpenLiteSpeed, please check this post: ${GREEN}https://forums.cyberpanel.net/discussion/126/tutorial-how-to-add-2nd-ip-for-websites/p1${NC}
 
@@ -72,44 +72,44 @@ For LiteSpeed Enterprise, please check this post: ${GREEN}https://forums.cyberpa
 
 ${BLUE}------------------------------------------------------------${NC}
 
-${PURPLE}8.${NC} How to remove 8090 port in CyberPanel URL ?
+${PURPLE}8.${NC} How to remove port 8090 from the CyberPanel URL?
 
-Please check this post ${GREEN}https://blog.cyberpanel.net/2018/12/25/how-to-remove-port-8090-from-cyberpanel/${NC}
-
-${BLUE}------------------------------------------------------------${NC}
-
-${PURPLE}9.${NC} How to enable Auto-Index for my site ?
-
-Please check this post ${GREEN}https://forums.cyberpanel.net/discussion/3850/tutorial-how-to-enable-auto-index-on-openlitespeed-and-litespeed-enterprise${NC}
+Please check this post: ${GREEN}https://blog.cyberpanel.net/2018/12/25/how-to-remove-port-8090-from-cyberpanel/${NC}
 
 ${BLUE}------------------------------------------------------------${NC}
 
-${PURPLE}10.${NC} How to add additional headers for my website ?
+${PURPLE}9.${NC} How to enable Auto-Index for my site?
 
-Please check this post ${GREEN}https://openlitespeed.org/kb/how-to-set-up-custom-headers/${NC}
-
-${BLUE}------------------------------------------------------------${NC}
-
-${PURPLE}11.${NC} How to mimic Apache deny/allow directive ?
-
-Please check this post ${GREEN}https://openlitespeed.org/kb/access-control/${NC}
+Please check this post: ${GREEN}https://forums.cyberpanel.net/discussion/3850/tutorial-how-to-enable-auto-index-on-openlitespeed-and-litespeed-enterprise${NC}
 
 ${BLUE}------------------------------------------------------------${NC}
 
-${PURPLE}12.${NC} How to fix max_allowed_packet error ?
+${PURPLE}10.${NC} How do I add additional headers for my website?
 
-You may see this error when your PHP script requires a larger packet size
+Please check this post: ${GREEN}https://openlitespeed.org/kb/how-to-set-up-custom-headers/${NC}
 
-add following code into ${RED}/etc/my.cnf${NC}
+${BLUE}------------------------------------------------------------${NC}
+
+${PURPLE}11.${NC} How do I mimic Apache deny/allow directive?
+
+Please check this post: ${GREEN}https://openlitespeed.org/kb/access-control/${NC}
+
+${BLUE}------------------------------------------------------------${NC}
+
+${PURPLE}12.${NC} How to fix the max_allowed_packet error?
+
+You may see this error when your PHP script requires a larger packet size.
+
+Add following code to the file ${RED}/etc/my.cnf${NC}
 
 ${GREEN}[mysqld]
 max_allowed_packet=500M${NC}
 
-and then restart MariaDB by command ${RED}systemctl restart mariadb${NC}
+Then restart MariaDB with the following command: ${RED}systemctl restart mariadb${NC}
 
 ${BLUE}------------------------------------------------------------${NC}
 
-${PURPLE}13.${NC} How to enable PHP error log ?
+${PURPLE}13.${NC} How do I enable the PHP error log?
 
-Please check this post ${GREEN}https://forums.cyberpanel.net/discussion/3977/tutorial-how-to-enable-php-error-log/p1${NC}
+Please check this post: ${GREEN}https://forums.cyberpanel.net/discussion/3977/tutorial-how-to-enable-php-error-log/p1${NC}
 "

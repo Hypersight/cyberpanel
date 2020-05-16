@@ -4,15 +4,15 @@ Webhosting control panel that uses OpenLiteSpeed as web server.
 
 ## Features
 
-* Different Level Of users.
+* Different level Of users.
 * Auto SSL.
 * FTP Server.
 * Light weight DNS Server (PowerDNS).
 * PHPMYAdmin.
 * Email Support (Rainloop).
-* FileManager.
-* PHP Managment.
-* Firewall (FirewallD & ConfigServer Firewall Intregration).
+* File Manager.
+* PHP Management.
+* Firewall (FirewallD & ConfigServer Firewall Integration).
 * One click Backup and Restore.
 
 # Supported PHPs

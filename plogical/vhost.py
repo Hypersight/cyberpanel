@@ -21,7 +21,7 @@ from random import randint
 from plogical.processUtilities import ProcessUtilities
 from managePHP.phpManager import PHPManager
 from plogical.vhostConfs import vhostConfs
-from ApachController.ApacheVhosts import ApacheVhost
+from ApacheController.ApacheVhosts import ApacheVhost
 try:
     from websiteFunctions.models import Websites, ChildDomains, aliasDomains
     from databases.models import Databases

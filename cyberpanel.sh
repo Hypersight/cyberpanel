@@ -27,8 +27,8 @@ CENTOS_8="False"
 WATCHDOG="OFF"
 BRANCH_NAME="v${TEMP:12:3}.${TEMP:25:1}"
 VIRT_TYPE=""
-GIT_URL="github.com/usmannasir/cyberpanel"
-GIT_CONTENT_URL="raw.githubusercontent.com/usmannasir/cyberpanel"
+GIT_URL="github.com/Hypersight/cyberpanel"
+GIT_CONTENT_URL="raw.githubusercontent.com/Hypersight/cyberpanel"
 
 
 check_return() {
@@ -86,7 +86,7 @@ pid=$(ps aux | grep "watchdog mariadb"  | grep -v grep | awk '{print $2}')
 	echo "nohup watchdog lsws > /dev/null 2>&1 &
 	nohup watchdog mariadb > /dev/null 2>&1 &" >> /etc/rc.local
 	fi
-echo -e "\n Setting up WatchDog..."
+echo -e "\nSetting up WatchDog..."
 fi
 }
 
@@ -118,7 +118,7 @@ PIDFile=/run/pure-ftpd.pid" > /etc/systemd/system/pure-ftpd.service.d/override.c
 		mkdir /etc/systemd/system/lshttpd.service.d
 		echo "[Service]
 PIDFile=/tmp/lshttpd/lshttpd.pid" > /etc/systemd/system/lshttpd.service.d/override.conf
-		echo -e "LiteSPeed service file modified for OpenVZ..."
+		echo -e "LiteSpeed service file modified for OpenVZ..."
 	fi
 
 	if [[ ! -d /etc/systemd/system/spamassassin.service.d ]] ; then
@@ -171,14 +171,14 @@ cd /root/cyberpanel-tmp/lsws-$LSWS_STABLE_VER/bin
 
 if [[ $LICENSE_KEY == "TRIAL" ]] ; then
 	if ./lshttpd -V |& grep  "ERROR" ; then
-	echo -e "\n\nIt apeears to have some issue with license , please check above result..."
+	echo -e "\n\nIt apeears there is an issue with your license, please check the above result..."
 	exit
 	fi
 	LICENSE_KEY="1111-2222-3333-4444"
 else
 	if ./lshttpd -r |& grep "ERROR" ; then
 	./lshttpd -r
-	echo -e "\n\nIt apeears to have some issue with license , please check above result..."
+	echo -e "\n\nIt apeears there is an issue with your license, please check the above result..."
 	exit
 	fi
 fi
@@ -192,8 +192,8 @@ rm -rf /root/cyberpanel-tmp
 special_change(){
 sed -i 's|cyberpanel.sh|'$DOWNLOAD_SERVER'|g' install.py
 sed -i 's|mirror.cyberpanel.net|'$DOWNLOAD_SERVER'|g' install.py
-sed -i 's|git clone https://github.com/usmannasir/cyberpanel|echo downloaded|g' install.py
-#change to CDN first, regardless country
+sed -i 's|git clone https://github.com/Hypersight/cyberpanel|echo downloaded|g' install.py
+#change to CDN first, regardless of country
 #sed -i 's|http://|https://|g' install.py
 
 if [[ $PROVIDER == "Alibaba Cloud" ]] ; then
@@ -234,10 +234,10 @@ trusted-host=pypi.python.org
 EOF
 		echo -e "\nSet pip repo..."
 fi
-#seems Alibaba cloud , other than CN , also requires change on ubuntu.
+#seems Alibaba cloud, other than CN, also requires a change on ubuntu.
 
 if [[ $SERVER_COUNTRY == "CN" ]] ; then
-#line1="$(grep -n "github.com/usmannasir/cyberpanel" install.py | head -n 1 | cut -d: -f1)"
+#line1="$(grep -n "github.com/Hypersight/cyberpanel" install.py | head -n 1 | cut -d: -f1)"
 #line2=$((line1 - 1))
 #sed -i "${line2}i\ \ \ \ \ \ \ \ subprocess.call(command, shell=True)" install.py
 #sed -i "${line2}i\ \ \ \ \ \ \ \ command = 'tar xzvf cyberpanel-git.tar.gz'" install.py
@@ -250,14 +250,14 @@ if [[ $SERVER_COUNTRY == "CN" ]] ; then
 	sed -i 's|https://copr.fedorainfracloud.org/coprs/copart/restic/repo/epel-7/copart-restic-epel-7.repo|https://'$DOWNLOAD_SERVER'/restic/restic.repo|g' install.py
 	sed -i 's|yum -y install http://cyberpanel.sh/gf-release-latest.gf.el7.noarch.rpm|wget -O /etc/yum.repos.d/gf.repo https://'$DOWNLOAD_SERVER'/gf-plus/gf.repo|g' install.py
 	sed -i 's|dovecot-2.3-latest|dovecot-2.3-latest-mirror|g' install.py
-	sed -i 's|git clone https://github.com/usmannasir/cyberpanel|wget https://cyberpanel.sh/cyberpanel-git.tar.gz \&\& tar xzvf cyberpanel-git.tar.gz|g' install.py
+	sed -i 's|git clone https://github.com/Hypersight/cyberpanel|wget https://cyberpanel.sh/cyberpanel-git.tar.gz \&\& tar xzvf cyberpanel-git.tar.gz|g' install.py
 	sed -i 's|http://repo.dovecot.org/ce-2.3-latest/centos/$releasever/RPMS/$basearch|https://'$DOWNLOAD_SERVER'/dovecot/|g' install.py
 	sed -i 's|'$DOWNLOAD_SERVER'|cyberpanel.sh|g' install.py
 	sed -i 's|https://www.litespeedtech.com/packages/5.0/lsws-5.4.2-ent-x86_64-linux.tar.gz|https://'$DOWNLOAD_SERVER'/litespeed/lsws-'$LSWS_STABLE_VER'-ent-x86_64-linux.tar.gz|g' installCyberPanel.py
 	sed -i 's|wget -O -  https://get.acme.sh \| sh|git clone https://gitee.com/qtwrk/acme.sh.git ; cd acme.sh ; ./acme.sh --install ; cd - ; rm -rf acme.sh|g' install.py
 	sed -i 's|composer.sh|composer_cn.sh|g' install.py
 	sed -i 's|yum -y install http://repo.iotti.biz/CentOS/7/noarch/lux-release-7-1.noarch.rpm|wget -O /etc/yum.repos.d/lux.repo https://'$DOWNLOAD_SERVER'/lux/lux.repo|g' install.py
-# global change for CN , regardless provider and system
+# global change for CN, regardless provider and system
 
 	if [[ $SERVER_OS == "CentOS" ]] ; then
 		DIR=$(pwd)
@@ -339,7 +339,7 @@ my_hostname=$(hostname)
 		echo "127.0.0.1 $my_hostname " >> /etc/hosts
 	fi
 
-#this should address on "sudo: unable to resolve host ..." on Ubuntu , it's not issue but annoying.
+#this should address on "sudo: unable to resolve host ..." on Ubuntu, it's not issue but annoying.
 
 if [[ $SERVER_OS == "CentOS" ]] ; then
 	setenforce 0
@@ -545,10 +545,10 @@ if [[ $SERVER_OS == "Ubuntu" ]] ; then
 fi
 
 if ifconfig -a | grep inet6 ; then
-	echo -e "\n IPv6 detected..."
+	echo -e "\nIPv6 detected..."
 else
 	sed -i 's|bind 127.0.0.1 ::1|bind 127.0.0.1|g' /etc/redis/redis.conf
-	echo -e "\n no IPv6 detected..."
+	echo -e "\nNo IPv6 detected..."
 fi
 
 if [[ $SERVER_OS == "CentOS" ]] ; then
@@ -589,9 +589,9 @@ else
 fi
 
 if [[ -f /sys/devices/virtual/dmi/id/product_uuid ]] ; then
-if [ "$(cat /sys/devices/virtual/dmi/id/product_uuid | cut -c 1-3)" = 'EC2' ] && [ -d /home/ubuntu ]; then
-	PROVIDER='Amazon Web Service'
-fi
+	if [ "$(cat /sys/devices/virtual/dmi/id/product_uuid | cut -c 1-3)" = 'EC2' ] && [ -d /home/ubuntu ]; then
+		PROVIDER='Amazon Web Service'
+	fi
 fi
 
 }
@@ -615,7 +615,7 @@ elif echo $OUTPUT | grep -q "Ubuntu 18.04" ; then
 	echo -e "\nDetecting Ubuntu 18.04...\n"
 	SERVER_OS="Ubuntu"
 	else
-		echo -e "\nUbuntu 18.04 x32 detected...ths only works on x64 system."
+		echo -e "\nUbuntu 18.04 x32 detected. This only works on x64 systems."
 		exit
 	fi
 else
@@ -629,7 +629,7 @@ fi
 check_root() {
 echo -e "\nChecking root privileges...\n"
 if echo $SUDO_TEST | grep SUDO > /dev/null ; then
-	echo -e "\nYou are using SUDO , please run as root user...\n"
+	echo -e "\nYou are using SUDO, please run as root user...\n"
 	echo -e "\nIf you don't have direct access to root user, please run \e[31msudo su -\e[39m command (do NOT miss the \e[31m-\e[39m at end or it will fail) and then run installation command again."
 	exit
 fi
@@ -646,11 +646,11 @@ fi
 
 check_panel() {
 if [ -d /usr/local/cpanel ]; then
-	echo -e "\ncPanel detected...exit...\n"
+	echo -e "\ncPanel detected, exiting...\n"
 	exit 1
 fi
 if [ -d /opt/plesk ]; then
-	echo -e "\nPlesk detected...exit...\n"
+	echo -e "\nPlesk detected, exiting...\n"
 	exit 1
 fi
 }
@@ -691,14 +691,14 @@ echo -e "\n Example:"
 echo -e "\n sh <(curl cyberpanel.sh) -v ols -p r or ./cyberpanel.sh --version ols --password random"
 echo -e "\n This will install CyberPanel OpenLiteSpeed and randomly generate the password."
 echo -e "\n sh <(curl cyberpanel.sh) -v LICENSE_KEY -a -p my_pass_word"
-echo -e "\n This will install LiteSpeed Enterise , replace LICENSE_KEY to actual license key and set password to my_pass_word\n"
+echo -e "\n This will install LiteSpeed Enterise, replace LICENSE_KEY to actual license key and set password to my_pass_word\n"
 }
 
 license_input() {
 VERSION="ENT"
 echo -e "\nPlease note that your server has \e[31m$TOTAL_RAM MB\e[39m RAM"
 echo -e "If you are using \e[31mFree Start\e[39m license, It will not start due to \e[31m2GB RAM limit\e[39m.\n"
-echo -e "If you do not have any license, you can also use trial license (if server has not used trial license before), type \e[31mTRIAL\e[39m\n"
+echo -e "If you do not have any license, you can also use a trial license (if the server has not used with a trial license before), type \e[31mTRIAL\e[39m\n"
 
 printf "%s" "Please input your serial number for LiteSpeed WebServer Enterprise:"
 read LICENSE_KEY
@@ -707,7 +707,7 @@ if [ -z "$LICENSE_KEY" ] ; then
 	exit
 fi
 
-echo -e "The serial number you input is: \e[31m$LICENSE_KEY\e[39m"
+echo -e "The serial number you entered is: \e[31m$LICENSE_KEY\e[39m"
 printf "%s"  "Please verify it is correct. [y/N]"
 read TMP_YN
 if [ -z "$TMP_YN" ] ; then
@@ -727,7 +727,7 @@ elif [[ $LICENSE_KEY == "trial" ]] || [[ $LICENSE_KEY == "TRIAL" ]] || [[ $LICEN
 	LICENSE_KEY="TRIAL"
 else
 	echo -e "\nLicense key seems incorrect, please verify\n"
-	echo -e "\nIf you are copying/pasting, please make sure you didn't paste blank space...\n"
+	echo -e "\nIf you are copying/pasting, please make sure you didn't paste blank spaces...\n"
 	exit
 fi
 
@@ -748,7 +748,7 @@ echo -e "		CyberPanel Installer v$CP_VER1$CP_VER2
   3. Exit.
 
   "
-read -p "  Please enter the number[1-3]: " num
+read -p "  Please enter the number [1-3]: " num
 echo ""
 case "$num" in
 	1)
@@ -784,7 +784,7 @@ echo -e "		CyberPanel Addons v$CP_VER1$CP_VER2
   4. Exit
   "
 
-echo && read -p "Please enter the number[1-4]: " num
+echo && read -p "Please enter the number [1-4]: " num
 case "$num" in
 	1)
 	memcached_installation
@@ -823,7 +823,7 @@ echo -e "		CyberPanel Installer v$CP_VER1$CP_VER2
   3. Exit.
 
   "
-read -p "  Please enter the number[1-3]: " num
+read -p "  Please enter the number [1-3]: " num
 echo ""
 case "$num" in
 	1)
@@ -905,7 +905,7 @@ else
 			}
 			')
 			if [[ $output == *">="* ]] ; then
-				echo -e "\nYou must use version number higher than 1.9.4"
+				echo -e "\nYou must use a version number higher than 1.9.4"
 				exit
 			else
 				BRANCH_NAME="v$TMP_YN"
@@ -937,7 +937,7 @@ fi
 
 #fi
 
-echo -e "\nPlease choose to use default admin password \e[31m1234567\e[39m, randomly generate one \e[31m(recommended)\e[39m or specify the admin password?"
+echo -e "\nPlease choose to use the default admin password \e[31m1234567\e[39m, randomly generate one \e[31m(recommended)\e[39m or specify the admin password?"
 printf "%s" "Choose [d]fault, [r]andom or [s]et password: [d/r/s] "
 read TMP_YN
 
@@ -946,32 +946,32 @@ if [[ $TMP_YN =~ ^(d|D| ) ]] || [[ -z $TMP_YN ]]; then
 	echo -e "\nAdmin password will be set to $ADMIN_PASS\n"
 elif [[ $TMP_YN =~ ^(r|R) ]] ; then
 	ADMIN_PASS=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 16 ; echo '')
-	echo -e "\nAdmin password will be provided once installation is completed...\n"
+	echo -e "\nAdmin password will be provided once installation is complete...\n"
 elif [[ $TMP_YN =~ ^(s|S) ]] ; then
 	echo -e "\nPlease enter your password:"
 	printf "%s" ""
 	read TMP_YN
 		if [ -z "$TMP_YN" ] ; then
-  		echo -e "\nPlease do not use empty string...\n"
+  		echo -e "\nPlease do not use an empty string...\n"
 			exit
 		fi
 		if [ ${#TMP_YN} -lt 8 ] ; then
-			echo -e "\nPassword lenth less than 8 digital, please choose a more complicated password.\n"
+			echo -e "\nPassword length is less than 8 chracters, please choose a more complicated password.\n"
 			exit
 		fi
 	TMP_YN1=$TMP_YN
-	echo -e "\nPlease confirm  your password:\n"
+	echo -e "\nPlease confirm your password:\n"
 	printf "%s" ""
 	read TMP_YN
 	if [ -z "$TMP_YN" ] ; then
-  	echo -e "\nPlease do not use empty string...\n"
+  	echo -e "\nPlease do not use an empty string...\n"
 		exit
 	fi
 	TMP_YN2=$TMP_YN
 	if [ $TMP_YN1 = $TMP_YN2 ] ; then
 		ADMIN_PASS=$TMP_YN1
 	else
-		echo -e "\nRepeated password didn't match , please check...\n"
+		echo -e "\nRepeated password didn't match, please check...\n"
 		exit
 	fi
 else
@@ -997,9 +997,9 @@ else
 	REDIS="ON"
 fi
 
-echo -e "\nWould you like to set up a WatchDog \e[31m(beta)\e[39m for Web service and Database service ?"
-echo -e "The watchdog script will be automatically started up after installation and server reboot"
-echo -e "If you want to kill the watchdog , run \e[31mwatchdog kill\e[39m"
+echo -e "\nWould you like to set up a WatchDog \e[31m(beta)\e[39m for Web service and Database service?"
+echo -e "The WatchDog script will be automatically started up after installation and server reboot"
+echo -e "If you want to kill the WatchDog, run \e[31mwatchdog kill\e[39m"
 echo -e "Please type Yes or no (with capital \e[31mY\e[39m, default Yes):"
 printf "%s"
 read TMP_YN
@@ -1022,7 +1022,7 @@ special_change
 if [[ $VERSION == "ENT" ]] ; then
 	echo -e "\nValidating the license..."
 	echo -e "\nThis may take a minute..."
-	echo -e "\nplease be patient...\n\n"
+	echo -e "\nPlease be patient...\n\n"
 	license_validation
 
 	SERIAL_NO="--ent ent --serial "
@@ -1042,7 +1042,7 @@ if [[ $debug == "0" ]] ; then
 fi
 
 if [[ $debug == "1" ]] ; then
-	wget -O requirements.txt https://$GIT_CONTENT_URL/${BRANCH_NAME}/requirments.txt
+	wget -O requirements.txt https://$GIT_CONTENT_URL/${BRANCH_NAME}/requirements.txt
 	check_return
 	/usr/local/CyberPanel/bin/pip3 install --ignore-installed -r requirements.txt
 	rm -f requirements.txt
@@ -1083,11 +1083,11 @@ export LC_ALL=en_US.UTF-8
 
 if [[ $DEV == "ON" ]] ; then
 	#install dev branch
-	#wget https://raw.githubusercontent.com/usmannasir/cyberpanel/$BRANCH_NAME/requirments.txt
+	#wget https://raw.githubusercontent.com/Hypersight/cyberpanel/$BRANCH_NAME/requirements.txt
 	cd /usr/local/
 	virtualenv -p /usr/bin/python3 CyberPanel
   source /usr/local/CyberPanel/bin/activate
-  wget -O requirements.txt https://$GIT_CONTENT_URL/${BRANCH_NAME}/requirments.txt
+  wget -O requirements.txt https://$GIT_CONTENT_URL/${BRANCH_NAME}/requirements.txt
 	check_return
   pip3.6 install --ignore-installed -r requirements.txt
 	check_return
@@ -1160,8 +1160,8 @@ chmod 1733 /var/lib/php/session
 if grep "\[ERROR\] We are not able to run ./install.sh return code: 1.  Fatal error, see /var/log/installLogs.txt for full details" /var/log/installLogs.txt > /dev/null; then
 	cd ${DIR}/cyberpanel/install/lsws-*
 	./install.sh
-	echo -e "\n\n\nIt seems LiteSpeed Enterprise has failed to install, please check your license key is valid"
-	echo -e "\nIf this license key has been used before, you may need to go to store to release it first."
+	echo -e "\n\n\nIt seems LiteSpeed Enterprise has failed to install, please check your license key is valid."
+	echo -e "\nIf this license key has been used before, you may need to go to their store to release it first."
 	exit
 fi
 
@@ -1181,7 +1181,7 @@ EOF
 
 virtualenv -p /usr/bin/python3 /usr/local/CyberCP
 source /usr/local/CyberCP/bin/activate
-wget -O requirements.txt https://$GIT_CONTENT_URL/${BRANCH_NAME}/requirments.txt
+wget -O requirements.txt https://$GIT_CONTENT_URL/${BRANCH_NAME}/requirements.txt
 check_return
 pip3.6 install --ignore-installed -r requirements.txt
 check_return
@@ -1343,7 +1343,7 @@ if [[ $PROVIDER != "undefined" ]] ; then
 else
 	echo -e "If your provider has a \e[31mnetwork-level firewall\033[39m"
 fi
-	echo -e "Please make sure you have opened following port for both in/out:"
+	echo -e "Please make sure you have opened the following ports, both in/out:"
 	echo -e "\033[0;32mTCP: 8090\033[39m for CyberPanel"
 	echo -e "\033[0;32mTCP: 80\033[39m, \033[0;32mTCP: 443\033[39m and \033[0;32mUDP: 443\033[39m for webserver"
 	echo -e "\033[0;32mTCP: 21\033[39m and \033[0;32mTCP: 40110-40210\033[39m for FTP"
@@ -1366,7 +1366,7 @@ options edns0" /etc/resolv.conf
 		sed -i 's|https://www.litespeedtech.com/packages/5.0/lsws-5.3.5-ent-x86_64-linux.tar.gz|https://cyberpanel.sh/packages/5.0/lsws-5.3.5-ent-x86_64-linux.tar.gz|g' /usr/local/CyberCP/install/installCyberPanel.py
 		sed -i 's|https://www.litespeedtech.com/packages/5.0/lsws-5.3.8-ent-x86_64-linux.tar.gz|https://cyberpanel.sh/packages/5.0/lsws-5.3.8-ent-x86_64-linux.tar.gz|g' /usr/local/CyberCP/serverStatus/serverStatusUtil.py
 		sed -i 's|https://www.litespeedtech.com/packages/5.0/lsws-5.3.8-ent-x86_64-linux.tar.gz|https://'$DOWNLOAD_SERVER'/litespeed/lsws-'$LSWS_STABLE_VER'-ent-x86_64-linux.tar.gz|g' /usr/local/CyberCP/serverStatus/serverStatusUtil.py
-		echo -e "If you have install LiteSpeed Enterprise, please run \e[31m/usr/local/lsws/admin/misc/lsup.sh\033[39m to update it to latest."
+		echo -e "If you have install LiteSpeed Enterprise, please run \e[31m/usr/local/lsws/admin/misc/lsup.sh\033[39m to update it to the latest."
 	fi
 fi
 
@@ -1396,7 +1396,7 @@ fi
 
 
 else
-echo "something went wrong..."
+echo "Something went wrong..."
 exit
 fi
 }
@@ -1421,7 +1421,7 @@ elif [[ $TMP == "-" ]] && [[ $TMP2 == "-" ]] && [[ $TMP3 == "-" ]] && [[ $KEY_SI
 	VERSION="ENT"
 	echo -e "\nLiteSpeed Enterprise license key set..."
 else
-	echo -e "\nCan not recognize the input value \e[31m$VERSION\e[39m "
+	echo -e "\nCannot recognize the input value \e[31m$VERSION\e[39m "
 	echo -e "\nPlease verify the input value..."
 	echo -e "\nPlease run with \e[31m-h\e[39m or \e[31m--help\e[39m for more detail."
 	exit
@@ -1452,7 +1452,7 @@ else
 		DEV_ARG="ON"
 		SILENT="OFF"
 	elif [[ $1 == "default" ]] ; then
-	echo -e "\nThis will start default installation...\n"
+	echo -e "\nThis will start the default installation...\n"
 	SILENT="ON"
 	POSTFIX_VARIABLE="ON"
 	POWERDNS_VARIABLE="ON"
@@ -1482,7 +1482,7 @@ else
 							ADMIN_PASS="1234567"
 						else
 							if [ ${#1} -lt 8 ] ; then
-								echo -e "\nPassword lenth less than 8 digital, please choose a more complicated password.\n"
+								echo -e "\nPassword length is less than 8 chracters, please choose a more complicated password.\n"
 								exit
 							fi
 							ADMIN_PASS="${1}"
@@ -1502,7 +1502,7 @@ else
 						exit
         		;;
 				*)
-						echo "unknown argument..."
+						echo "Unknown argument..."
 						show_help
 						exit
         		;;
@@ -1518,16 +1518,16 @@ SERVER_IP=$(curl --silent --max-time 10 -4 https://cyberpanel.sh/?ip)
 if [[ $SERVER_IP =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
 	echo -e "Valid IP detected..."
 else
-	echo -e "Can not detect IP, exit..."
+	echo -e "Cannot detect a valid IP, exiting..."
 	exit
 fi
-SERVER_COUNTRY="unknow"
+SERVER_COUNTRY="unknown"
 SERVER_COUNTRY=$(curl --silent --max-time 5 https://cyberpanel.sh/?country)
 if [[ ${#SERVER_COUNTRY} == "2" ]] || [[ ${#SERVER_COUNTRY} == "6" ]] ; then
 	echo -e "\nChecking server..."
 	else
 	echo -e "\nChecking server..."
-	SERVER_COUNTRY="unknow"
+	SERVER_COUNTRY="unknown"
 fi
 #SERVER_COUNTRY="CN"
 #test string

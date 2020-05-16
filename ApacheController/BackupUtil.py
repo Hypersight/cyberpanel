@@ -38,7 +38,7 @@ class BackupUtil:
 
     @staticmethod
     def BackupDBS():
-        command = "/usr/local/CyberCP/ApachController/backup.sh"
+        command = "/usr/local/CyberCP/ApacheController/backup.sh"
         BackupUtil.normalExecutioner(command)
 
         message = "Database backups successfully generated on %s" % (time.strftime("%I-%M-%S-%a-%b-%Y"))

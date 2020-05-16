@@ -6100,7 +6100,7 @@ msgstr ""
 #: tuning/templates/tuning/liteSpeedTuning.html:13
 msgid ""
 "You can use this page to tweak your server according to your website "
-"requirments."
+"requirements."
 msgstr ""
 
 #: tuning/templates/tuning/liteSpeedTuning.html:18

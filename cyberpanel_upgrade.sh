@@ -7,15 +7,15 @@ SERVER_OS='Undefined'
 OUTPUT=$(cat /etc/*release)
 TEMP=$(curl --silent https://cyberpanel.net/version.txt)
 BRANCH_NAME=v${TEMP:12:3}.${TEMP:25:1}
-GIT_URL="github.com/usmannasir/cyberpanel"
-GIT_CONTENT_URL="raw.githubusercontent.com/usmannasir/cyberpanel"
-SERVER_COUNTRY="unknow"
+GIT_URL="github.com/Hypersight/cyberpanel"
+GIT_CONTENT_URL="raw.githubusercontent.com/Hypersight/cyberpanel"
+SERVER_COUNTRY="unknown"
 SERVER_COUNTRY=$(curl --silent --max-time 5 https://cyberpanel.sh/?country)
 if [[ ${#SERVER_COUNTRY} == "2" ]] || [[ ${#SERVER_COUNTRY} == "6" ]] ; then
 	echo -e "\nChecking server..."
 else
 	echo -e "\nChecking server..."
-	SERVER_COUNTRY="unknow"
+	SERVER_COUNTRY="unknown"
 fi
 
 #SERVER_COUNTRY="CN"
@@ -66,9 +66,9 @@ rm -f /usr/local/CyberCP/cert_conf
 }
 
 input_branch() {
-	echo -e "\nPress Enter key to continue with latest version or Enter specific version such as: \e[31m1.9.4\e[39m , \e[31m1.9.5\e[39m ...etc"
-	echo -e "\nIf nothing is input in 10 seconds , script will proceed with latest stable. "
-	echo -e "\nPlease press Enter key , or specify a version number ,or wait for 10 seconds timeout: "
+	echo -e "\nPress Enter key to continue with latest version or enter a specific version such as: \e[31m1.9.4\e[39m , \e[31m1.9.5\e[39m, etc"
+	echo -e "\nIf nothing is entered in 10 seconds, the script will proceed with latest stable version."
+	echo -e "\nPlease press Enter key, specify a version number, or wait for the 10 second timeout: "
 	printf "%s" ""
 	read -t 10 TMP_YN
 
@@ -85,14 +85,14 @@ input_branch() {
 				}
 				')
 				if [[ $output == *">="* ]] ; then
-					echo -e "\nYou must use version number higher than 1.9.4"
+					echo -e "\nYou must use a version number higher than 1.9.4"
 					exit
 				else
 					BRANCH_NAME="v$TMP_YN"
-					echo "set branch name to $BRANCH_NAME"
+					echo "Set branch name to $BRANCH_NAME"
 				fi
 			else
-				echo -e "\nPlease input a valid format version number."
+				echo -e "\nPlease enter a valid version number."
 				exit
 			fi
 	fi
@@ -108,7 +108,7 @@ fi
 check_root() {
 echo -e "\nChecking root privileges...\n"
 if echo $SUDO_TEST | grep SUDO > /dev/null ; then
-	echo -e "\nYou are using SUDO , please run as root user...\n"
+	echo -e "\nYou are using SUDO  please run as root user...\n"
 	echo -e "\nIf you don't have direct access to root user, please run \e[31msudo su -\e[39m command (do NOT miss the \e[31m-\e[39m at end or it will fail) and then run upgrade command again."
 	exit
 fi
@@ -127,7 +127,7 @@ check_return() {
 if [[ $? -eq "0" ]] ; then
 	:
 else
-	echo -e "\ncommand failed, exiting..."
+	echo -e "\nCommand failed, exiting..."
 	exit
 fi
 }
@@ -139,27 +139,27 @@ check_root
 echo -e "\nChecking OS..."
 OUTPUT=$(cat /etc/*release)
 if  echo $OUTPUT | grep -q "CentOS Linux 7" ; then
-	echo -e "\nDetecting CentOS 7.X...\n"
+	echo -e "\Detected CentOS 7.X...\n"
 	SERVER_OS="CentOS7"
 	yum clean all
   yum update -y
 elif echo $OUTPUT | grep -q "CloudLinux 7" ; then
-	echo -e "\nDetecting CloudLinux 7.X...\n"
+	echo -e "\Detected CloudLinux 7.X...\n"
 	SERVER_OS="CentOS7"
 	yum clean all
   yum update -y
 elif  echo $OUTPUT | grep -q "CentOS Linux 8" ; then
-	echo -e "\nDetecting CentOS 8.X...\n"
+	echo -e "\Detected CentOS 8.X...\n"
 	SERVER_OS="CentOS8"
 	yum clean all
   yum update -y
 elif echo $OUTPUT | grep -q "Ubuntu 18.04" ; then
-	echo -e "\nDetecting Ubuntu 18.04...\n"
+	echo -e "\Detected Ubuntu 18.04...\n"
 	SERVER_OS="Ubuntu"
 else
 	cat /etc/*release
 	echo -e "\nUnable to detect your OS...\n"
-	echo -e "\nCyberPanel is supported on Ubuntu 18.04, CentOS 7.x, CentOS 8.x and CloudLinux 7.x...\n"
+	echo -e "\nCyberPanel is supported on Ubuntu 18.04 x32_64, CentOS 7.x, CentOS 8.x and CloudLinux 7.x...\n"
 	exit 1
 fi
 
@@ -192,8 +192,8 @@ fi
 rm -rf /usr/local/CyberPanel
 virtualenv -p /usr/bin/python3 --system-site-packages /usr/local/CyberPanel
 check_return
-rm -f requirments.txt
-wget -O requirements.txt https://$GIT_CONTENT_URL/${BRANCH_NAME}/requirments.txt
+rm -f requirements.txt
+wget -O requirements.txt https://$GIT_CONTENT_URL/${BRANCH_NAME}/requirements.txt
 . /usr/local/CyberPanel/bin/activate
 check_return
 
@@ -215,18 +215,18 @@ rm -rf upgrade.py
 wget https://$GIT_CONTENT_URL/${BRANCH_NAME}/plogical/upgrade.py
 
 if [[ $SERVER_COUNTRY == "CN" ]] ; then
-sed -i 's|wget  https://raw.githubusercontent.com/usmannasir/cyberpanel/v1.9.4/lscpd-0.2.4 -P /usr/local/lscp/bin/|cp -f /usr/local/CyberCP/lscpd-0.2.4 /usr/local/lscp/bin/lscpd-0.2.4|g' upgrade.py
-sed -i 's|wget  https://raw.githubusercontent.com/usmannasir/cyberpanel/%s/lscpd-0.2.4 -P /usr/local/lscp/bin/|cp -f /usr/local/CyberCP/lscpd-0.2.4 /usr/local/lscp/bin/lscpd-0.2.4|g' upgrade.py
+sed -i 's|wget  https://raw.githubusercontent.com/Hypersight/cyberpanel/v1.9.4/lscpd-0.2.4 -P /usr/local/lscp/bin/|cp -f /usr/local/CyberCP/lscpd-0.2.4 /usr/local/lscp/bin/lscpd-0.2.4|g' upgrade.py
+sed -i 's|wget  https://raw.githubusercontent.com/Hypersight/cyberpanel/%s/lscpd-0.2.4 -P /usr/local/lscp/bin/|cp -f /usr/local/CyberCP/lscpd-0.2.4 /usr/local/lscp/bin/lscpd-0.2.4|g' upgrade.py
 sed -i $'s/0.2.4\' % (branch)/0.2.4\'/' upgrade.py
-sed -i 's|raw.githubusercontent.com/usmannasir/cyberpanel|'${GIT_CONTENT_URL}'|g' upgrade.py
-sed -i 's|git clone https://github.com/usmannasir/cyberpanel|git clone https://'${GIT_URL}'|g' upgrade.py
+sed -i 's|raw.githubusercontent.com/Hypersight/cyberpanel|'${GIT_CONTENT_URL}'|g' upgrade.py
+sed -i 's|git clone https://github.com/Hypersight/cyberpanel|git clone https://'${GIT_URL}'|g' upgrade.py
 fi
 
 /usr/local/CyberPanel/bin/python upgrade.py $BRANCH_NAME
 check_return
 virtualenv -p /usr/bin/python3 /usr/local/CyberCP
 check_return
-wget -O requirements.txt https://$GIT_CONTENT_URL/${BRANCH_NAME}/requirments.txt
+wget -O requirements.txt https://$GIT_CONTENT_URL/${BRANCH_NAME}/requirements.txt
 
 if [ $SERVER_OS = "Ubuntu" ] ; then
   . /usr/local/CyberCP/bin/activate
@@ -333,7 +333,6 @@ fi
 systemctl restart lscpd
 
 rm -f requirements.txt
-rm -f requirments.txt
 rm -f upgrade.py
 rm -rf wsgi-lsapi-1.5
 rm -f wsgi-lsapi-1.5.tgz

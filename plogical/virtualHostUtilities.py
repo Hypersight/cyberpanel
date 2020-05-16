@@ -30,8 +30,8 @@ from plogical.vhost import vhost
 from plogical.applicationInstaller import ApplicationInstaller
 from plogical.acl import ACLManager
 from plogical.processUtilities import ProcessUtilities
-from ApachController.ApacheController import ApacheController
-from ApachController.ApacheVhosts import ApacheVhost
+from ApacheController.ApacheController import ApacheController
+from ApacheController.ApacheVhosts import ApacheVhost
 from managePHP.phpManager import PHPManager
 
 try:

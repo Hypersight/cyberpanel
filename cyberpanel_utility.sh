@@ -4,29 +4,29 @@
 export LC_CTYPE=en_US.UTF-8
 SUDO_TEST=$(set)
 BRANCH_NAME="stable"
-GIT_URL="github.com/usmannasir/cyberpanel"
-GIT_CONTENT_URL="raw.githubusercontent.com/usmannasir/cyberpanel"
+GIT_URL="github.com/Hypersight/cyberpanel"
+GIT_CONTENT_URL="raw.githubusercontent.com/Hypersight/cyberpanel"
 
 check_OS() {
 echo -e "\nChecking OS..."
 OUTPUT=$(cat /etc/*release)
 if  echo $OUTPUT | grep -q "CentOS Linux 7" ; then
-	echo -e "\nDetecting CentOS 7.X...\n"
+	echo -e "\nDetected CentOS 7.X...\n"
 	SERVER_OS="CentOS"
 elif echo $OUTPUT | grep -q "CloudLinux 7" ; then
-	echo -e "\nDetecting CloudLinux 7.X...\n"
+	echo -e "\nDetected CloudLinux 7.X...\n"
 	SERVER_OS="CentOS"
 elif  echo $OUTPUT | grep -q "CentOS Linux 8" ; then
-	echo -e "\nDetecting CentOS 8.X...\n"
+	echo -e "\nDetected CentOS 8.X...\n"
 	SERVER_OS="CentOS"
 	CENTOS_8="True"
 elif echo $OUTPUT | grep -q "Ubuntu 18.04" ; then
-	echo -e "\nDetecting Ubuntu 18.04...\n"
+	echo -e "\nDetected Ubuntu 18.04...\n"
 	SERVER_OS="Ubuntu"
 else
 	cat /etc/*release
 	echo -e "\nUnable to detect your OS...\n"
-	echo -e "\nCyberPanel is supported on Ubuntu 18.04, CentOS 7.x, CentOS 8.x and CloudLinux 7.x...\n"
+	echo -e "\nCyberPanel is supported on Ubuntu 18.04 x32_64, CentOS 7.x, CentOS 8.x and CloudLinux 7.x...\n"
 	exit 1
 fi
 }
@@ -47,10 +47,10 @@ if [[ $TMP_YN == "1" ]] ; then
 		wget -O /etc/cyberpanel/watchdog.sh https://cyberpanel.sh/misc/watchdog.sh
 		chmod 700 /etc/cyberpanel/watchdog.sh
 		ln -s /etc/cyberpanel/watchdog.sh /usr/local/bin/watchdog
-		echo -e "\nWatchDos has been installed..."
+		echo -e "\nWatchDog has been installed..."
 		set_watchdog
 	else
-		echo -e "\nWatchDos is already installed..."
+		echo -e "\nWatchDog is already installed..."
 		set_watchdog
 	fi
 elif [[ $TMP_YN == "2" ]] ; then
@@ -83,13 +83,13 @@ check_return() {
 if [[ $? -eq "0" ]] ; then
 	:
 else
-	echo -e "\ncommand failed, exiting..."
+	echo -e "\nCommand failed, exiting..."
 	exit
 fi
 }
 
 self_check() {
-echo -e "\nChecking Cyberpanel Utility update..."
+echo -e "\nChecking CyberPanel Utility update..."
 SUM=$(md5sum /usr/bin/cyberpanel_utility)
 SUM1=${SUM:0:32}
 #get md5sum of local file
@@ -113,7 +113,7 @@ else
 	rm -f /usr/bin/cyberpanel_utility
 	mv /tmp/cyberpanel_utility.sh /usr/bin/cyberpanel_utility
 	chmod 700 /usr/bin/cyberpanel_utility
-	echo -e "\nCyberPanel Utility update compelted..."
+	echo -e "\nCyberPanel Utility update completed..."
 	echo -e "\nPlease execute it again..."
 	exit
 	else
@@ -127,13 +127,13 @@ rm -f /tmp/cyberpanel_utility.sh
 }
 
 cyberpanel_upgrade() {
-SERVER_COUNTRY="unknow"
+SERVER_COUNTRY="unknown"
 SERVER_COUNTRY=$(curl --silent --max-time 5 https://cyberpanel.sh/?country)
 if [[ ${#SERVER_COUNTRY} == "2" ]] || [[ ${#SERVER_COUNTRY} == "6" ]] ; then
 	echo -e "\nChecking server..."
 else
 	echo -e "\nChecking server..."
-	SERVER_COUNTRY="unknow"
+	SERVER_COUNTRY="unknown"
 fi
 
 if [[ $SERVER_COUNTRY == "CN" ]] ; then
@@ -141,8 +141,8 @@ if [[ $SERVER_COUNTRY == "CN" ]] ; then
 	GIT_CONTENT_URL="gitee.com/qtwrk/cyberpanel/raw"
 fi
 
-echo -e "CyberPanel Upgrade will start in 10 seconds"
-echo -e "If you want to cancel, please press CTRL + C to cancel it"
+echo -e "CyberPanel Upgrade will start in 10 seconds."
+echo -e "If you want to cancel, please press CTRL + C"
 sleep 10
 echo -e "CyberPanel upgrading..."
 rm -f /usr/local/cyberpanel_upgrade.sh
@@ -213,7 +213,7 @@ install_redis() {
 		sed -i 's|bind 127.0.0.1 ::1|bind 127.0.0.1|g' /etc/redis/redis.conf
 		#remove ipv6 binding to prevent Redis fail to start.
 		fi
-		echo -e "\n no IPv6 detected..."
+		echo -e "\n No IPv6 detected..."
 	fi
 
 	if systemctl is-active --quiet redis ; then
@@ -226,7 +226,7 @@ install_redis() {
 }
 
 install_memcached() {
-echo -e "\n Would you like to install Memcached or LiteSpeed Mmecached ?"
+echo -e "\n Would you like to install Memcached or LiteSpeed Memcached ?"
 echo -e "\n 1. LiteSpeed Memcached"
 echo -e "\n 2. Memcached"
 echo -e "\n 3. Back to Main Menu\n"
@@ -318,7 +318,7 @@ echo -e "		CyberPanel Utility Tools \e[31m(beta)\e[39m
 
   3. WatchDog \e[31m(beta)\e[39m
 
-  4. Frequently Asked Question (FAQ)
+  4. Frequently Asked Questions (FAQ)
 
   5. Exit.
 
@@ -350,8 +350,7 @@ esac
 
 panel_check(){
 if [[ ! -f /etc/cyberpanel/machineIP ]] ; then
-	echo -e "\nCan not detect CyberPanel..."
-	echo -e "\nExit..."
+	echo -e "\nCannot detect CyberPanel, exiting..."
 	exit
 fi
 }
@@ -359,7 +358,7 @@ fi
 sudo_check() {
 	echo -e "\nChecking root privileges..."
 	if echo $SUDO_TEST | grep SUDO > /dev/null ; then
-		echo -e "\nYou are using SUDO , please run as root user..."
+		echo -e "\nYou are using SUDO, please run as root user..."
 		echo -e "\nIf you don't have direct access to root user, please run \e[31msudo su -\e[39m command (do NOT miss the \e[31m-\e[39m at end or it will fail) and then run utility command again."
 		exit
 	fi

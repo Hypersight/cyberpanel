@@ -246,7 +246,7 @@ class PHPManager:
     def fetchPHPExtensions(data):
 
         if ApachePHP.objects.all().count() == 0:
-            phpfilePath = '/usr/local/CyberCP/ApachController/phpApache.xml'
+            phpfilePath = '/usr/local/CyberCP/ApacheController/phpApache.xml'
 
             for items in ['54', '55', '56', '70', '71', '72', '73']:
                 phpvers = ApachePHP(phpVers='php' + items)

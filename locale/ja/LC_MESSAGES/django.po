@@ -5559,7 +5559,7 @@ msgstr "LiteSpeed チューニング - Cyber​​Panel"
 #: tuning/templates/tuning/liteSpeedTuning.html:13
 msgid ""
 "You can use this page to tweak your server according to your website "
-"requirments."
+"requirements."
 msgstr ""
 "このページを使用して、Webサイトの要件に従ってサーバーを調整することができま"
 "す。"

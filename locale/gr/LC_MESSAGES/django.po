@@ -6281,7 +6281,7 @@ msgstr "Συντονισμός LiteSpeed - CyberPanel"
 #: tuning/templates/tuning/liteSpeedTuning.html:13
 msgid ""
 "You can use this page to tweak your server according to your website "
-"requirments."
+"requirements."
 msgstr ""
 "Μπορείτε να χρησιμοποιήσετε αυτήν τη σελίδα για να τροποποιήσετε το "
 "διακομιστή σας σύμφωνα με τις απαιτήσεις του ιστότοπού σας."

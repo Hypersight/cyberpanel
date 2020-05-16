@@ -3,7 +3,7 @@ import os
 import subprocess
 import shlex
 import plogical.CyberCPLogFileWriter as logging
-from ApachController.ApacheVhosts import ApacheVhost
+from ApacheController.ApacheVhosts import ApacheVhost
 
 
 class ApacheController:

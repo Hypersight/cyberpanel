@@ -6155,7 +6155,7 @@ msgstr "LiteSpeed Tuning - CyberPanel"
 #: tuning/templates/tuning/liteSpeedTuning.html:13
 msgid ""
 "You can use this page to tweak your server according to your website "
-"requirments."
+"requirements."
 msgstr ""
 "Puoi usare questa pagina per modificare il tuo server in base al tuo sito "
 "webrequisiti."
